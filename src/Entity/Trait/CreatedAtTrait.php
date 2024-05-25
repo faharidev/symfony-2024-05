@@ -4,8 +4,8 @@ namespace App\Entity\Trait;
 
 use Doctrine\ORM\Mapping as ORM;
 
-trait CreatedAtTrait {
-
+trait CreatedAtTrait
+{
     #[ORM\Column(options: ['default' => 'now()'])]
     private ?\DateTimeImmutable $createdAt = null;
 
@@ -22,7 +22,7 @@ trait CreatedAtTrait {
     }
 
     #[ORM\PrePersist]
-    public function setCreatedAtValue()
+    public function setCreatedAtValue(): void
     {
         $this->createdAt = new \DateTimeImmutable();
     }
