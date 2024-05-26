@@ -1,5 +1,9 @@
 # Makefile
 SHELL := /bin/bash
+up:
+	docker compose up -d --wait
+	symfony serve -d
+	symfony run -d --watch=config,src,templates,vendor symfony console messenger:consume async
 
 tests:
 	APP_ENV=test symfony console doctrine:database:drop --force || true
