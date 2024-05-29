@@ -125,9 +125,21 @@ class Comment implements \Stringable
         return $this->state;
     }
 
-    public function setState(CommentStateEnum $state): static
+    public function setState(CommentStateEnum|string $state): static
     {
-        $this->state = $state;
+        $this->state = is_string($state) ? CommentStateEnum::tryFrom($state) : $state;
+
+        return $this;
+    }
+
+    public function getStateAsString(): ?string
+    {
+        return $this->state->value;
+    }
+
+    public function setStateAsString(string $state): static
+    {
+        $this->setState($state);
 
         return $this;
     }
